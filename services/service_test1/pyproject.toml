@@ -1,0 +1,15 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "test1"
+version = "0.1.0"
+description = ""
+authors = ["Yuri and Vitoria"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+fastapi = "^0.92.0"
+uvicorn = "^0.20.0"
