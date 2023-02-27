@@ -10,8 +10,5 @@ services:
     build:
       context: ./services/service_test1
     container_name: service-test1
-    environment:
-      - PORT=8082
-      - CONTENT=Testing
     ports:
       - 8082:8082
