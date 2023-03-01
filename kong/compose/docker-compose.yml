@@ -98,7 +98,6 @@ services:
     image: postgres:9.5
     ports:
       - "5432:5432"
-    profiles: ["database"]
     environment:
       POSTGRES_DB: ${KONG_PG_DATABASE:-kong}
       POSTGRES_USER: ${KONG_PG_USER:-kong}
@@ -115,8 +114,39 @@ services:
     tty: true
     networks:
       - kong-net
-    volumes:
-      - kong_data:/var/lib/postgresql/data
+    # volumes:
+    #   - kong_data:/var/lib/postgresql/data
+
+  konga:
+    container_name: konga
+    image: pantsel/konga:latest
+    restart: always
+    networks:
+      - kong-net
+    environment:
+      DB_ADAPTER: postgres
+      DB_HOST: db
+      DB_USER: kong
+      DB_PASSWORD: kong
+      TOKEN_SECRET: 3VEZyaRql0GXfJhd3ZV11wrlX5X3e8Fl
+      DB_DATABASE: konga_db
+      NODE_ENV: production
+    depends_on:
+      - db
+    ports:
+      - "1337:1337"
+
+  konga-prepare:
+    container_name: konga-prepare
+    image: pantsel/konga:latest
+    command: "-c prepare -a postgres -u postgresql://kong:kong@db:5432/konga_db"
+    networks:
+      - kong-net
+    restart: on-failure
+    links:
+      - db
+    depends_on:
+      - db
 
 secrets:
   kong_postgres_password:
