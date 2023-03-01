@@ -8,7 +8,36 @@ networks:
 services:
   service_test1:
     build:
-      context: ./services/service_test1
+      context: ./services/service_test
     container_name: service-test1
+    environment:
+      PORT: "8081"
+      CONTENT: "Service test 1 - Hello instruct"
+    networks:
+      - kong-net
+    ports:
+      - 8081:8081
+
+  service_test2:
+    build:
+      context: ./services/service_test
+    container_name: service-test2
+    environment:
+      PORT: "8082"
+      CONTENT: "Service test 2 - Hello instruct"
+    networks:
+      - kong-net
     ports:
       - 8082:8082
+
+  service_test3:
+    build:
+      context: ./services/service_test
+    container_name: service-test3
+    environment:
+      PORT: "8083"
+      CONTENT: "Service test 3 - Hello instruct"
+    networks:
+      - kong-net
+    ports:
+      - 8083:8083

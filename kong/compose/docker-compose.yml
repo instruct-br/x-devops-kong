@@ -20,7 +20,7 @@ volumes:
 
 networks:
   kong-net:
-    external: false
+    external: true
 
 services:
   kong-migrations:
@@ -96,6 +96,8 @@ services:
 
   db:
     image: postgres:9.5
+    ports:
+      - "5432:5432"
     profiles: ["database"]
     environment:
       POSTGRES_DB: ${KONG_PG_DATABASE:-kong}
