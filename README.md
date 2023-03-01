@@ -99,7 +99,7 @@ obs: Também é possível utilizar o plugin apenas em serviços e rotas específ
 
 O Proxy Cache Plugin acelera o desempenho armazenando em cache as respostas com base em códigos de resposta configuráveis, tipos de conteúdo (`content-types`) e métodos (`methods`) de solicitação.
 
-Habilitando o plugin globalmente (qualquer resposta de requisição será cacheada) =>
+Habilitando o plugin globalmente (qualquer rota poderá ter a resposta da requisição cacheada) =>
 ```
 $ curl -i -X POST http://localhost:8001/plugins \
   --data "name=proxy-cache" \
@@ -126,7 +126,7 @@ X-Cache-Key: c9e1d4c8e5fd8209a5969eb3b0e85bc6
 X-Cache-Status: Miss
 ```
 
-Após 30 segundos repita o mesmo comando e obterá a resposta =>
+Dentro de 30 segundos repita o mesmo comando e obterá a resposta =>
 ```
 X-Cache-Key: c9e1d4c8e5fd8209a5969eb3b0e85bc6
 X-Cache-Status: Hit
